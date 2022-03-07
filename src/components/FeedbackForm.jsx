@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react"
 import Card from "./shared/Card"
 import Button from "./shared/Button"
-import { isDisabled } from "@testing-library/user-event/dist/utils"
+// import { isDisabled } from "@testing-library/user-event/dist/utils"
 import RatingSelect from "./RatingSelect"
 import FeedbackContext from "../context/FeedbackContext"
 
