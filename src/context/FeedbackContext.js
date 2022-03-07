@@ -32,7 +32,7 @@ export const FeedbackProvider = ({ children }) => {
         newFeedback.id = uuidv4()
         setFeedback([newFeedback, ...feedback]) // this is going to set feedback to an array with all the current feedback items and my new feedback
     }
-    
+
     // Delete feedback
     const deleteFeedback = (id) => {
         if (window.confirm('Are you sure you want to delete?')) {
@@ -40,24 +40,33 @@ export const FeedbackProvider = ({ children }) => {
         }
     }
 
-    // Set item to be updated
-    const editFeedback = (item) => {
-        setFeedbackEdit({
-            item,
-            edit: true
-        })
+    // Update feedback item
+    const updateFeedback = (id, updItem) => {
+        // console.log(id, updItem);
+        setFeedback(
+            feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+        )
     }
 
-    return <FeedbackContext.Provider
-        value={{
-            feedback,
-            addFeedback,
-            deleteFeedback,
-            editFeedback, // function runs when we click the pencil icon
-            feedbackEdit // it is the actual piece of state that holds the item & boolean value
-        }}>
-        {children}
-    </FeedbackContext.Provider>
+// Set item to be updated
+const editFeedback = (item) => {
+    setFeedbackEdit({
+        item,
+        edit: true
+    })
+}
+
+return <FeedbackContext.Provider
+    value={{
+        feedback,
+        feedbackEdit, // it is the actual piece of state that holds the item & boolean value
+        addFeedback,
+        deleteFeedback,
+        editFeedback, // function runs when we click the pencil icon
+        updateFeedback,
+    }}>
+    {children}
+</FeedbackContext.Provider>
 }
 
 
